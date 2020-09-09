@@ -27,6 +27,11 @@ def getHeaders(response):
     }
     return headers
 
+def getQuestion(response):
+    parsedResponse = BeautifulSoup(response.text, 'html.parser')
+    legend = parsedResponse.findAll('legend', { 'class': 'question-legend' }).pop()
+    return legend.findAll('span', { 'class': 'user-generated' }).pop().text
+
 if __name__ == '__main__':
     initialResponse = initialRequest()
 
