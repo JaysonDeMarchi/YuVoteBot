@@ -6,3 +6,5 @@ services:
       context: .
       dockerfile: Dockerfile
     image: 'yu-vote-bot:latest'
+    volumes:
+      - .:/usr/src/app

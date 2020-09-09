@@ -1,6 +1,6 @@
 FROM python:rc-alpine
 
-WORKDIR /user/src/app/
+WORKDIR /usr/src/app/
 
 RUN pip install requests
 
