@@ -33,4 +33,4 @@ if __name__ == '__main__':
     headers = getHeaders(initialResponse)
     formData = getFormData(initialResponse)
 
-    print(formData)
+    stepResponse = requests.post(BASE_URL, data=formData, headers=headers)
