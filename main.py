@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 import requests
 import sys
 
@@ -10,7 +11,17 @@ def initialRequest():
         sys.exit()
     return response
 
+def getFormData(response):
+    parsedResponse = BeautifulSoup(response.text, 'html.parser')
+    form = parsedResponse.form
+    inputs = {}
+    for inputData in form.findAll('input'):
+        inputs[inputData.get('name')] = inputData.get('value')
+    return inputs
+
 if __name__ == '__main__':
     initialResponse = initialRequest()
 
-    print(initialResponse.headers)
+    formData = getFormData(initialResponse)
+
+    print(formData)
