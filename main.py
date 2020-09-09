@@ -19,9 +19,18 @@ def getFormData(response):
         inputs[inputData.get('name')] = inputData.get('value')
     return inputs
 
+def getHeaders(response):
+    responseHeaders = response.headers
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36',
+        'Cookie': responseHeaders['Set-Cookie'],
+    }
+    return headers
+
 if __name__ == '__main__':
     initialResponse = initialRequest()
 
+    headers = getHeaders(initialResponse)
     formData = getFormData(initialResponse)
 
     print(formData)
