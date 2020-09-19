@@ -11,6 +11,7 @@ class Session:
         def __init__(self):
             with open(Session.dataFilePath) as sessionData:
                 self.data = json.load(sessionData)
+                sessionData.close()
 
     instance = None
 
@@ -20,3 +21,22 @@ class Session:
     
     def __str__(self):
         return json.dumps(self.instance.data)
+
+    def save(self):
+        with open(Session.dataFilePath, 'w') as filepath:
+            data = json.dumps(
+                self.instance.data,
+                indent=4,
+                sort_keys=True
+            )
+            filepath.write(data)
+            filepath.close()
+
+    def getData(self, key=''):
+        if key == '':
+            return self.instance.data
+        return self.instance.data[key]
+
+    def setData(self, key, value):
+        self.instance.data[key] = value
+        return self
