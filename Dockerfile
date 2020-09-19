@@ -4,6 +4,7 @@ WORKDIR /usr/src/app/
 
 RUN pip install \
     bs4 \
+    prompt_toolkit \
     requests
 
 COPY . .
