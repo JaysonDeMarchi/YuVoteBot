@@ -15,14 +15,13 @@ def execute(voteCount = 1):
     for currentVote in range(0, voteCount):
         response = vote_request.pageLoad()
         for step in steps:
-            index = step
             startTime = int(time.time() * 1000)
             question = parser.parseResponseToQuestion(response)
             requestData = vote_response.buildData(
                 parser.getFormData(response),
-                index,
+                step,
                 question,
                 startTime
             )
             headers = vote_response.buildHeaders(response)
-            response = vote_request.executeStep(index, requestData, headers)
+            response = vote_request.executeStep(step, requestData, headers)
