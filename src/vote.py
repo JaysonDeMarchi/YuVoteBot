@@ -24,4 +24,4 @@ def execute(voteCount = 1):
                 startTime
             )
             headers = vote_response.buildHeaders(response)
-            response = vote_request.executeStep(step, requestData, headers)
+            response = vote_request.executeStep(requestData, headers)
