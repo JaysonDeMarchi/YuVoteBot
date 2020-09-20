@@ -4,6 +4,14 @@ from .model.question import Question
 def parseResponse(response):
     return BeautifulSoup(response.text, 'html.parser')
 
+def getFormData(response):
+    parsedResponse = parseResponse(response)
+    form = parsedResponse.form
+    inputs = {}
+    for inputData in form.findAll('input'):
+        inputs[inputData.get('name')] = inputData.get('value')
+    return inputs
+
 def getTitle(response):
     parsedResponse = parseResponse(response)
     results = parsedResponse.findAll('span', { 'class': 'title-text' })
