@@ -8,6 +8,28 @@ session = Session()
 def buildHeaders(response): 
     return []
 
+def getRelativePosition(step, question):
+    if (step == 0):
+        return [[
+            0,
+            question.getData(
+                'options'
+            ).index(
+                question.getData('answer')
+            )
+        ]]
+    if (step == 1):
+        return [[
+            question.getData(
+                'options'
+            ).index(
+                question.getData('answer')
+            ),
+            0
+        ]]
+    if (step == 2):
+        return []
+
 def solve(question):
     options = question.getData('options')
     radioOptions = list(map(
@@ -23,35 +45,28 @@ def solve(question):
     return question
 
 
-def buildResponseQualityData(step, question, startTime):
+def buildResponseQualityData(step, question, startTime, questionId):
     step = int(step)
+    steps = session.getData('steps')
+    sessionResponseData = steps[str(step)]['response_quality_data']
+    endTime = int(time.time() * 1000)
     return {
         'question_info': {
-            'qid_536755120': {
+            'qid_' + questionId: {
                 'number': step + 1,
-                'type': 'single_image_choice',
-                'option_count': question.getData('options'),
+                'type': sessionResponseData['type'],
+                'option_count': len(question.getData('options')),
                 'has_other': False,
                 'other_selected': None,
-                'relative_position': [[
-                    step,
-                    question.getData(
-                        'options'
-                    ).index(
-                        question.getData('answer')
-                    )
-                ]],
-                'dimensions': [
-                    step + 1,
-                    3
-                ],
+                'relative_position': getRelativePosition(step, question),
+                'dimensions': sessionResponseData['dimensions'],
                 'input_method': None,
                 'is_hybrid': False
             }
         },
         'start_time': startTime,
-        'end_time': 1600573885405,
-        'time_spent': 371193,
+        'end_time': endTime,
+        'time_spent': endTime - startTime,
         'previous_clicked': False,
         'has_backtracked': False,
         'bi_voice': {}
@@ -59,16 +74,24 @@ def buildResponseQualityData(step, question, startTime):
 
 def buildData(formData, step, question, startTime):
     data = formData
+    questions = session.getData('questions')
+    if (step in questions and question.getData('question') in questions[step]):
+        question.setData('answer', questions[step][question.getData('question')])
     if not (question.getData('answer')):
         question = solve(question)
-        questions = session.getData('questions')
         if (step in questions and question.getData('question') not in questions[step]):
             questions[step][question.getData('question')] = question.getData('answer')
             session.setData('questions', questions)
             session.save()
 
+    questionId = list(filter(
+        lambda key: key[0].isdigit(),
+        data.keys()
+    )).pop()
+
     data['response_quality_data'] = buildResponseQualityData(
         step,
         question,
-        startTime
+        startTime,
+        questionId
     )
