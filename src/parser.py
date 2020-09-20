@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from model.question import Question
+from .model.question import Question
 
 def parseResponse(response):
     return BeautifulSoup(response.text, 'html.parser')
@@ -21,10 +21,10 @@ def parseResponseToQuestion(response):
         { 'class': 'user-generated' }
     ).pop().text
 
-    options = map(
+    options = list(map(
         lambda option: option.text.strip(),
         parsedResponse.findAll('span', { 'class': 'question-body-font-theme' })
-    )
+    ))
     data = {
         'question': question,
         'options': options

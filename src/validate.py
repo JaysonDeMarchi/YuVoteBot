@@ -1,6 +1,6 @@
+from . import parser
+from .session import Session
 from prompt_toolkit import prompt
-from session import Session
-import parser
 import requests
 
 session = Session()
@@ -10,7 +10,7 @@ def requestHomepage(url):
 
 def baseUrl():
     newBaseUrl = ''
-    if not session.getData().has_key('base_url') or session.getData('base_url') == '':
+    if ('base_url' not in session.getData() or session.getData('base_url') == ''):
         print('Missing Poll URL.')
         newBaseUrl = prompt(u'New Poll URL: ')
 
