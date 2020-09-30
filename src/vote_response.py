@@ -107,10 +107,10 @@ def buildData(formData, step, question, startTime):
         data.keys()
     )).pop()
 
-    data['response_quality_data'] = buildResponseQualityData(
+    data['response_quality_data'] = json.dumps(buildResponseQualityData(
         step,
         question,
         startTime,
         questionId
-    )
+    ))
     return data

@@ -31,5 +31,5 @@ def execute(voteCount = 1):
             response = requests.post(
                 session.getData('base_url'),
                 cookies=cookies,
-                files=dict(survey_data=requestData['survey_data'])
+                files=requestData
             )
