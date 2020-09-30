@@ -1,11 +1,11 @@
-from .model.abstract_model import AbstractModel
+from .abstract_model import AbstractModel
 import json
 import os
 
 class Session:
     dataFilePath = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            '../data/session.json'
+            '../../data/session.json'
     )
     
     class __Session(AbstractModel):

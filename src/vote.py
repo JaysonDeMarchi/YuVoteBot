@@ -3,7 +3,7 @@ from . import \
     validate, \
     vote_request, \
     vote_response
-from .session import Session
+from .model.session import Session
 import time
 import requests
 

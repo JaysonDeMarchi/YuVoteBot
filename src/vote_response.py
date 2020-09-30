@@ -1,4 +1,4 @@
-from .session import Session
+from .model.session import Session
 from prompt_toolkit.formatted_text import HTML
 from prompt_toolkit.shortcuts import radiolist_dialog
 import json

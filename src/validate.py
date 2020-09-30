@@ -1,5 +1,5 @@
 from . import parser
-from .session import Session
+from .model.session import Session
 from prompt_toolkit import prompt
 import requests
 

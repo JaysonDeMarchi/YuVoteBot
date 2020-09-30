@@ -1,4 +1,4 @@
-from .session import Session
+from .model.session import Session
 import requests
 import sys
 
