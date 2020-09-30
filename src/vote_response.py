@@ -117,3 +117,4 @@ def buildData(formData, step, question, startTime):
         startTime,
         questionId
     )
+    return data
