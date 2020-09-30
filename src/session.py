@@ -1,3 +1,4 @@
+from .model.abstract_model import AbstractModel
 import json
 import os
 
@@ -7,7 +8,7 @@ class Session:
             '../data/session.json'
     )
     
-    class __Session:
+    class __Session(AbstractModel):
         def __init__(self):
             with open(Session.dataFilePath) as sessionData:
                 self.data = json.load(sessionData)
@@ -20,23 +21,15 @@ class Session:
             Session.instance = Session.__Session()
     
     def __str__(self):
-        return json.dumps(self.instance.data)
+        return self.instance.__str__()
 
     def save(self):
         with open(Session.dataFilePath, 'w') as filepath:
-            data = json.dumps(
-                self.instance.data,
-                indent=4,
-                sort_keys=True
-            )
-            filepath.write(data)
+            filepath.write(self.__str__())
             filepath.close()
 
     def getData(self, key=''):
-        if key == '':
-            return self.instance.data
-        return self.instance.data[key]
+        return self.instance.getData(key)
 
     def setData(self, key, value):
-        self.instance.data[key] = value
-        return self
+        return self.instance.setData(key, value)
