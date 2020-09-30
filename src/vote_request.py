@@ -10,7 +10,6 @@ def pageLoad():
     if (response.status_code != 200):
         print('ERROR: status_code ' + str(response.status_code))
         print('Requested URL: ' + baseUrl)
-        sys.exit()
     return response
 
 def executeStep(data=[], headers=[]):
@@ -18,5 +17,4 @@ def executeStep(data=[], headers=[]):
     if (response.status_code != 200):
         print('ERROR: status_code ' + str(response.status_code))
         print('Requested URL: ' + baseUrl)
-        sys.exit()
     return response
