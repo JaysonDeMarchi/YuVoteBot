@@ -1,6 +1,4 @@
 from .model.session import Session
-from prompt_toolkit.formatted_text import HTML
-from prompt_toolkit.shortcuts import radiolist_dialog
 import json
 import random
 import re
@@ -49,21 +47,6 @@ def getRelativePosition(step, question):
     if (step == 2):
         return []
 
-def solve(question):
-    options = question.getData('options')
-    radioOptions = list(map(
-        lambda option: (option, option),
-        options
-    ))
-    answer = radiolist_dialog(
-        values=radioOptions,
-        title=question.getData('question'),
-        text='Answer: ',
-    ).run()
-    question.setData('answer', answer)
-    return question
-
-
 def buildResponseQualityData(step, question, startTime, questionId):
     step = int(step)
     steps = session.getData('steps')
@@ -99,7 +82,7 @@ def buildData(formData, step, question, startTime):
     if (step in questions and question.getData('question') in questions[step]):
         question.setData('answer', questions[step][question.getData('question')])
     if not (question.getData('answer')):
-        question = solve(question)
+        question = question.solve()
         if (step in questions and question.getData('question') not in questions[step]):
             questions[step][question.getData('question')] = question.getData('answer')
             session.setData('questions', questions)
