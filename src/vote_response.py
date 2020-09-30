@@ -1,4 +1,3 @@
-from .config import Config
 from .session import Session
 from prompt_toolkit.formatted_text import HTML
 from prompt_toolkit.shortcuts import radiolist_dialog
@@ -6,7 +5,6 @@ import json
 import re
 import time
 
-config = Config()
 session = Session()
 
 def buildCookies(response):
@@ -16,19 +14,17 @@ def buildCookies(response):
         'ep202',
         'ep203'
     ]
-    responseHeaders = response.headers
-    cookies = re.split('[, ]', responseHeaders['Set-Cookie'])
-    cookies = list(filter(
-        lambda cookie: re.search('|'.join(validCookies), cookie),
-        cookies
+    setCookies = re.split('[, ]', response.headers['Set-Cookie'])
+    setCookies = list(filter(
+        lambda setCookie: re.search('|'.join(validCookies), setCookie),
+        setCookies
     ))
-    return re.sub(';$', '', ' '.join(cookies))
-
-def buildHeaders(response, data):
-    headers = config.getData('http_headers')
-    headers['Cookie'] = buildCookies(response)
-    headers['Content-Length'] = str(len(str(json.dumps(data))))
-    return headers
+    cookies = {}
+    for setCookie in setCookies:
+        setCookie = re.sub(';$', '', setCookie)
+        key,value = setCookie.split('=', maxsplit=1)
+        cookies[key] = value
+    return cookies
 
 def getRelativePosition(step, question):
     if (step == 0):

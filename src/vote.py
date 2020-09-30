@@ -3,7 +3,11 @@ from . import \
     validate, \
     vote_request, \
     vote_response
+from .session import Session
 import time
+import requests
+
+session = Session()
 
 steps = [
     '0'
@@ -23,5 +27,9 @@ def execute(voteCount = 1):
                 question,
                 startTime
             )
-            headers = vote_response.buildHeaders(response, requestData)
-            response = vote_request.executeStep(requestData, headers)
+            cookies = vote_response.buildCookies(response)
+            response = requests.post(
+                session.getData('base_url'),
+                cookies=cookies,
+                files=dict(survey_data=requestData['survey_data'])
+            )
