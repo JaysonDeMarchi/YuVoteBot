@@ -2,6 +2,7 @@ from .session import Session
 from prompt_toolkit.formatted_text import HTML
 from prompt_toolkit.shortcuts import radiolist_dialog
 import json
+import random
 import re
 import time
 
@@ -67,6 +68,8 @@ def buildResponseQualityData(step, question, startTime, questionId):
     step = int(step)
     steps = session.getData('steps')
     sessionResponseData = steps[str(step)]['response_quality_data']
+    # simulate human like response timing
+    time.sleep(random.uniform(5, 7))
     endTime = int(time.time() * 1000)
     return {
         'question_info': {
