@@ -5,8 +5,13 @@
             "The\u00a0next Round 2 match-up of the Create-A-Card project is\u00a0X-Saber vs. Fortune Lady!Please note, only one vote is permitted per participant. By submitting your vote, you acknowledge that you may only vote once.Voting ends Monday,\u00a0September\u00a021 at Noon Pacific Time.": "X-Saber",
             "Welcome to the semifinals!\u00a0Today, our featured match-up of the Create-A-Card project is\u00a0Inzektor vs. Dinomist!Please note, only one vote is permitted per participant. By submitting your vote, you acknowledge that you may only vote once.Voting ends Thursday,\u00a0October 1 at Noon Pacific Time.": "Dinomist"
         },
-        "1": {},
-        "2": {}
+        "1": {
+            "Who does Astral\u00a0Duel alongside\u00a0in Yu-Gi-Oh! ZEXAL?": "Yuma",
+            "Who's the\u00a0protagonist in Yu-Gi-Oh! ZEXAL?": "Yuma"
+        },
+        "2": {
+            "Thank you for taking the survey, check done to complete.": "Done"
+        }
     },
     "steps": {
         "0": {
