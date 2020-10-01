@@ -4,7 +4,8 @@ validCookies = [
     'attr_multitouch',
     'ep201',
     'ep202',
-    'ep203'
+    'ep203',
+    'RP_393255938'
 ]
 
 def build(response):
