@@ -2,29 +2,9 @@ from .model.session import Session
 import \
     json, \
     random, \
-    re, \
     time
 
 session = Session()
-
-def buildCookies(response):
-    validCookies = [
-        'attr_multitouch',
-        'ep201',
-        'ep202',
-        'ep203'
-    ]
-    setCookies = re.split('[, ]', response.headers['Set-Cookie'])
-    setCookies = list(filter(
-        lambda setCookie: re.search('|'.join(validCookies), setCookie),
-        setCookies
-    ))
-    cookies = {}
-    for setCookie in setCookies:
-        setCookie = re.sub(';$', '', setCookie)
-        key,value = setCookie.split('=', maxsplit=1)
-        cookies[key] = value
-    return cookies
 
 def getRelativePosition(step, question):
     if (step == 0):

@@ -1,4 +1,5 @@
 from . import \
+    cookieBuilder, \
     parser, \
     validate, \
     vote_request, \
@@ -28,7 +29,7 @@ def execute(voteCount = 1):
                 question,
                 startTime
             )
-            cookies = vote_response.buildCookies(response)
+            cookies = cookieBuilder.build(response)
             response = requests.post(
                 session.getData('base_url'),
                 cookies=cookies,
