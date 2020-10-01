@@ -4,8 +4,9 @@ from . import \
     vote_request, \
     vote_response
 from .model.session import Session
-import time
-import requests
+import \
+    time, \
+    requests
 
 session = Session()
 

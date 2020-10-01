@@ -1,8 +1,9 @@
 from .model.session import Session
-import json
-import random
-import re
-import time
+import \
+    json, \
+    random, \
+    re, \
+    time
 
 session = Session()
 

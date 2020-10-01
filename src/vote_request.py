@@ -1,6 +1,5 @@
 from .model.session import Session
 import requests
-import sys
 
 session = Session()
 baseUrl = session.getData('base_url')
