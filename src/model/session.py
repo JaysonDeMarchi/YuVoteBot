@@ -35,15 +35,19 @@ class Session:
     def setData(self, key, value):
         return self.instance.setData(key, value)
 
+    def getFlatQuestions(self):
+        questions = {}
+        for key in self.getData('questions').keys():
+            print(questions)
+            setOfQuestions = self.getData('questions')[key]
+            questions = {
+                **questions,
+                **setOfQuestions
+            }
+        return questions
+
     def getAnswer(self, question, options):
-        questionsByStep = self.getData('questions')
-        questions = {
-            **questionsByStep['0'],
-            **questionsByStep['1'],
-            **questionsByStep['2']
-        }
-        if (question not in questions):
-            answer = Question({}).solve(question, options)
-        else:
-            answer = questions[question]
-        return answer
+        questions = self.getFlatQuestions()
+        return questions[question] \
+            if question in questions \
+            else Question({}).solve(question, options)
