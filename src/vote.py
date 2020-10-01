@@ -12,7 +12,9 @@ import \
 session = Session()
 
 steps = [
-    '0'
+    '0',
+    '1',
+    '2'
 ]
 
 def execute(voteCount = 1):
