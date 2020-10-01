@@ -35,5 +35,6 @@ def execute(voteCount = 1):
             response = requests.post(
                 session.getData('base_url'),
                 cookies=cookies,
-                files=requestData
+                data=requestData,
+                files={'file': ''} # Tricking requests lib to set the content type to multipart/form without having to declare all the headers
             )
