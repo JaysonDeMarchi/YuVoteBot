@@ -1,5 +1,8 @@
 from bs4 import BeautifulSoup
 from .model.question import Question
+from .model.session import Session
+
+session = Session()
 
 def parseResponse(response):
     return BeautifulSoup(response.text, 'html.parser')
@@ -34,6 +37,7 @@ def parseResponseToQuestion(response):
         parsedResponse.findAll('span', { 'class': 'question-body-font-theme' })
     ))
     data = {
+        'answer': session.getAnswer(question, options),
         'question': question,
         'options': options
     }

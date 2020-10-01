@@ -8,16 +8,14 @@ class Question(AbstractModel):
         'options': []
     }
 
-    def solve(self):
-        options = self.getData('options')
+    def solve(self, question = '', options = []):
         radioOptions = list(map(
             lambda option: (option, option),
             options
         ))
         answer = radiolist_dialog(
             values=radioOptions,
-            title=self.getData('self'),
+            title=question,
             text='Answer: ',
         ).run()
-        self.setData('answer', answer)
-        return self
+        return answer

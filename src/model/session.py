@@ -1,4 +1,5 @@
 from .abstract_model import AbstractModel
+from .question import Question
 import json
 import os
 
@@ -33,3 +34,16 @@ class Session:
 
     def setData(self, key, value):
         return self.instance.setData(key, value)
+
+    def getAnswer(self, question, options):
+        questionsByStep = self.getData('questions')
+        questions = {
+            **questionsByStep['0'],
+            **questionsByStep['1'],
+            **questionsByStep['2']
+        }
+        if (question not in questions):
+            answer = Question({}).solve(question, options)
+        else:
+            answer = questions[question]
+        return answer

@@ -62,8 +62,7 @@ def buildData(formData, step, question, startTime):
     questions = session.getData('questions')
     if (step in questions and question.getData('question') in questions[step]):
         question.setData('answer', questions[step][question.getData('question')])
-    if not (question.getData('answer')):
-        question = question.solve()
+    else:
         if (step in questions and question.getData('question') not in questions[step]):
             questions[step][question.getData('question')] = question.getData('answer')
             session.setData('questions', questions)
